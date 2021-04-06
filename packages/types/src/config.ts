@@ -1,4 +1,5 @@
 import { Configuration, Options } from 'webpack'
+import { Argv } from './yargs'
 import { Config } from './third-party/webpack-chain'
 export interface IConfig {
   cwd: string
@@ -13,12 +14,14 @@ export interface IConfig {
     clientOutPut: string
     serverOutPut: string
   }
-  proxy: any
+  proxy?: any
   cssOrder: string[]
   jsOrder: string[]
   css?: () => {
     loaderOptions: {
+      cssOptions: any
       postcss: {
+        options: any
         plugins: any[]
       }
     }
@@ -33,7 +36,6 @@ export interface IConfig {
   cssModulesWhiteList: RegExp[]
   prefix?: string
   dynamic: boolean
-  feFramework: string
   mode: string
   webpackDevServerConfig: any
   stream: boolean
@@ -41,9 +43,15 @@ export interface IConfig {
     describe: object
     content: string
   }>
+  locale?: {
+    enable: false
+  }
 }
 type Optional <T>= { [key in keyof T]?: T[key] }
 
+export interface proxyOptions {
+  express?: boolean
+}
 export type UserConfig = Optional<IConfig>
 
 export interface StyleOptions {
@@ -53,4 +61,17 @@ export interface StyleOptions {
   modules: boolean
   loader?: string
   importLoaders: number
+}
+
+export interface IPlugin {
+  clientPlugin?: {
+    start?: (argv?: Argv) => void
+    build?: (argv?: Argv) => void
+    deploy?: (argv?: Argv) => void
+  }
+  serverPlugin?: {
+    start?: (argv?: Argv) => void
+    build?: (argv?: Argv) => void
+    deploy?: (argv?: Argv) => void
+  }
 }

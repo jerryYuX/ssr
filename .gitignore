@@ -77,3 +77,9 @@ package-lock.json
 cypress/screenshots
 
 cypress/videos
+
+packages/**/README.md
+
+example/**/typings
+
+example/**/vite.config.js

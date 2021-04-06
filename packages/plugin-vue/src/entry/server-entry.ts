@@ -1,22 +1,13 @@
 import * as Vue from 'vue'
-import * as Vuex from 'vuex'
 import { findRoute, getManifest, logGreen } from 'ssr-server-utils'
 import { FeRouteItem, ISSRContext, IConfig } from 'ssr-types'
 import { sync } from 'vuex-router-sync'
+import * as serialize from 'serialize-javascript'
+// @ts-expect-error
+import feRoutes from 'ssr-temporary-routes'
+
 import { createRouter } from './router'
-
-// @ts-expect-error
-Vue.use(Vuex)
-
-const serialize = require('serialize-javascript')
-// @ts-expect-error
-const store = require(vuexStoreFilePath) // define by webpack define plugin
-
-function createStore () {
-  return new Vuex.Store(store)
-}
-
-const feRoutes = require('ssr-temporary-routes/route')
+import { createStore } from './store'
 
 const serverRender = async (ctx: ISSRContext, config: IConfig): Promise<Vue.Component> => {
   const router = createRouter()

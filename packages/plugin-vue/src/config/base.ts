@@ -9,7 +9,7 @@ const loadModule = require.resolve
 
 const getBaseConfig = (chain: WebpackChain) => {
   const config = loadConfig()
-  const { moduleFileExtensions, useHash, isDev, cssModulesWhiteList, chainBaseConfig } = config
+  const { moduleFileExtensions, useHash, isDev, chainBaseConfig } = config
   const mode = process.env.NODE_ENV as Mode
   chain.mode(mode)
   chain.module.strictExportPresence(true)
@@ -30,7 +30,7 @@ const getBaseConfig = (chain: WebpackChain) => {
     .end()
   chain.module
     .rule('images')
-    .test(/\.(jpe?g|png|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/)
+    .test(/\.(jpe?g|png|woff|woff2|eot|ttf|svg|gif)(\?[a-z0-9=.]+)?$/)
     .use('url-loader')
     .loader(loadModule('url-loader'))
     .options({
@@ -98,7 +98,6 @@ const getBaseConfig = (chain: WebpackChain) => {
     .end()
 
   setStyle(isDev, chain, /\.css$/, {
-    exclude: cssModulesWhiteList,
     rule: 'css',
     modules: false,
     importLoaders: 1

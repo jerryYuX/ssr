@@ -9,7 +9,8 @@ const loadModule = require.resolve
 
 const getBaseConfig = (chain: WebpackChain) => {
   const config = loadConfig()
-  const { moduleFileExtensions, useHash, isDev, cssModulesWhiteList, chainBaseConfig } = config
+  const { moduleFileExtensions, useHash, isDev, chainBaseConfig, locale } = config
+
   const mode = process.env.NODE_ENV as Mode
   chain.resolve
     .extensions
@@ -38,7 +39,7 @@ const getBaseConfig = (chain: WebpackChain) => {
     .end()
   chain.module
     .rule('images')
-    .test(/\.(jpe?g|png|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/)
+    .test(/\.(jpe?g|png|woff|woff2|eot|ttf|svg|gif)(\?[a-z0-9=.]+)?$/)
     .use('url-loader')
     .loader(loadModule('url-loader'))
     .options({
@@ -66,10 +67,27 @@ const getBaseConfig = (chain: WebpackChain) => {
       babelParserPlugins: ['jsx', 'classProperties', 'decorators-legacy']
     })
     .end()
-
   chain
     .plugin('vue-loader')
     .use(require('vue-loader').VueLoaderPlugin)
+    .end()
+
+  locale?.enable && chain.module
+    .rule('i18n-resource')
+    .test(/\.(json5?|ya?ml)$/)
+    .include.add(join(getCwd(), './web/locales')).end()
+    .type('javascript/auto')
+    .use('i18n-resource')
+    .loader('@intlify/vue-i18n-loader')
+    .end()
+
+  // block support
+  locale?.enable && chain.module
+    .rule('i18n')
+    .resourceQuery(/blockType=i18n/)
+    .type('javascript/auto')
+    .use('i18n')
+    .loader('@intlify/vue-i18n-loader')
     .end()
 
   chain.module
@@ -103,7 +121,6 @@ const getBaseConfig = (chain: WebpackChain) => {
     .end()
 
   setStyle(isDev, chain, /\.css$/, {
-    exclude: cssModulesWhiteList,
     rule: 'css',
     modules: false,
     importLoaders: 1

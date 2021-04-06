@@ -21,7 +21,7 @@
 
 此框架脱胎于 [egg-react-ssr](https://github.com/ykfe/egg-react-ssr) 项目和`ssr` v4.3版本（midway-faas + react ssr），在之前的基础上做了诸多演进，通过插件化的代码组织形式，支持任意服务端框架与任意前端框架的组合使用。开发者可以选择通过 Serverless 方式部署或是以传统 Node.js 的应用形式部署，并且我们专注于提升 Serverless 场景下服务端渲染应用的开发体验，打造了一站式的开发，发布应用服务的功能。最大程度提升开发者的开发体验，将应用的开发，部署成本降到最低。
 
-在最新的 v5.0 版本中，同时支持 React 和 Vue2/Vue3 的服务端渲染框架，且提供一键以 Serverless 的形式发布上云的功能。我们可以非常有自信说它是地球上最先进的ssr框架。如果你希望获得开箱即用的体验且能够一键部署上云，请选择 `ssr` 框架。
+在最新的 v5.0 版本中，同时支持 React 和 Vue2/Vue3 作为服务端渲染框架且构建工具我们同样支持了最流行的 Vite 来提升应用的启动速度和 HMR 速度，且提供一键以 Serverless 的形式发布上云的功能。我们可以非常有自信说它是地球上最先进的ssr框架。如果你希望获得开箱即用的体验且能够一键部署上云，请选择 `ssr` 框架。
 
 ## 哪些应用在使用
 
@@ -63,6 +63,10 @@
 </b></sub></a></td>
 <td align="center"><a target="_blank" href="http://tx.ssr-fc.com/"><img src="http://s0.60logo.com/uploads/items/images/soft/180126/tengxunyun.svg" width="100px;"/><br><sub><b>部署于腾讯云示例应用
 </b></sub></a></td>
+<td align="center"><a href="https://www.gszq.com/" target="_blank"><img src="https://www.gszq.com/static/media/icon-slogan.4d1c7974.png
+" width="100px;" alt="国盛证券"/><br />
+<a href="https://www.gszq.com/" target="_bvlank"><sub><b>国盛证券
+</b></a></td>
 </tr>
 </table>
 
@@ -73,6 +77,7 @@
 - 🧲　插件驱动：基于插件架构，用户更加专注于业务逻辑；
 - 💯　Serverless优先：一键发布到各种Serverless平台，也支持传统Web Server，比如Egg、Midway、Nest等。
 - 🛡　高可用场景，可无缝从SSR降级到CSR，最佳容灾方案。
+- 😄　功能丰富，构建工具支持 Webpack/Vite
 
 ## 已实现的功能
 
@@ -81,6 +86,7 @@
 | 里程碑                                                                 | 状态 |
 | ---------------------------------------------------------------------- | ---- |
 | 支持任意服务端框架与任意前端框架的组合使用。(Serverless/Midway/Nestjs) + (React/Vue2/Vue3)             | 🚀   |
+| 支持 [vite](https://vite-design.surge.sh/) 作为构建工具在 SSR 场景下的组合[使用](#使用Vite作为构建工具) |  🚀    |
 | 最小而美的实现服务端渲染功能                           | 🚀   |
 | 针对Serverless 场景对代码包的大小的严格限制，将生产环境的代码包大小做到极致            | 🚀   |
 | 同时支持约定式前端路由和声明式前端路由                            | 🚀   |
@@ -94,8 +100,7 @@
 | React 场景下使用 useContext + useReducer 实现极简的[数据管理](#React跨组件通信)方案，摒弃传统的 redux/dva 等数据管理方案                         |    🚀  |
 | 支持在阿里云 [云平台](https://zhuanlan.zhihu.com/p/139210473)创建使用          | 🚀     |
 | ssr deploy 一键部署到[阿里云](https://www.aliyun.com/)平台           | 🚀   |
-| ssr deploy --tencent 无需修改任何配置一键部署到[腾讯云](https://cloud.tencent.com/)平台                                   | 🚀                                  |    |
-| 支持 [vite](https://vite-design.surge.sh/) 作为构建工具在 SSR 场景下的组合使用 |    |
+| ssr deploy --tencent 无需修改任何配置一键部署到[腾讯云](https://cloud.tencent.com/)平台                                   | 🚀                                |    
 
 ## 方案对比
 
@@ -234,7 +239,8 @@ $ DEBUG=ssr:* npm start # 打印所有的 ssr 模块提供的 debug 信息
 | [ssr-plugin-midway]          | [![ssr-plugin-midway-status]][ssr-plugin-midway] | provide start and build fetature by [midway@2.0](https://midwayjs.org/) |
 | [ssr-plugin-nestjs]          | [![ssr-plugin-nestjs-status]][ssr-plugin-nestjs] | provide start and build feature by [Nestjs](https://docs.nestjs.com/) |
 | [ssr-plugin-react]          | [![ssr-plugin-react-status]][ssr-plugin-react] | develop react application only be used in development |
-| [ssr-plugin-vue]          | [![ssr-plugin-vue-status]][ssr-plugin-vue] | develop vue application only be used in development |
+| [ssr-plugin-vue]          | [![ssr-plugin-vue-status]][ssr-plugin-vue] | develop vue2 application only be used in development |
+| [ssr-plugin-vue3]          | [![ssr-plugin-vue3-status]][ssr-plugin-vue3] | develop vue3 application only be used in development |
 | [ssr-server-utils]          | [![ssr-server-utils-status]][ssr-server-utils] | server utils in Node.js environment |
 | [ssr-client-utils]          | [![ssr-client-utils-status]][ssr-client-utils] | client utils in browser environment |
 | [ssr-hoc-react]          | [![ssr-hoc-react-status]][ssr-hoc-react] | provide hoc component for react |
@@ -251,6 +257,7 @@ $ DEBUG=ssr:* npm start # 打印所有的 ssr 模块提供的 debug 信息
 [ssr-plugin-nestjs-status]: https://img.shields.io/npm/v/ssr-plugin-nestjs.svg
 [ssr-plugin-react-status]: https://img.shields.io/npm/v/ssr-plugin-react.svg
 [ssr-plugin-vue-status]: https://img.shields.io/npm/v/ssr-plugin-vue.svg
+[ssr-plugin-vue3-status]: https://img.shields.io/npm/v/ssr-plugin-vue3.svg
 [ssr-server-utils-status]: https://img.shields.io/npm/v/ssr-server-utils.svg
 [ssr-types-status]: https://img.shields.io/npm/v/ssr-types.svg
 [ssr-webpack-status]: https://img.shields.io/npm/v/ssr-webpack.svg
@@ -264,6 +271,7 @@ $ DEBUG=ssr:* npm start # 打印所有的 ssr 模块提供的 debug 信息
 [ssr-plugin-nestjs]: https://github.com/ykfe/ssr/tree/dev/packages/plugin-nestjs
 [ssr-plugin-react]: https://github.com/ykfe/ssr/tree/dev/packages/plugin-react
 [ssr-plugin-vue]: https://github.com/ykfe/ssr/tree/dev/packages/plugin-vue
+[ssr-plugin-vue3]: https://github.com/ykfe/ssr/tree/dev/packages/plugin-vue3
 [ssr-server-utils]: https://github.com/ykfe/ssr/tree/dev/packages/server-utils
 [ssr-types]: https://github.com/ykfe/ssr/tree/dev/packages/types
 [ssr-webpack]: https://github.com/ykfe/ssr/tree/dev/packages/webpack
@@ -396,9 +404,9 @@ module.exports = {
 - 前端路由: 约定式路由/声明式路由
 - 数据管理: vuex
 
-##### JSX(可选)
+##### Vue3 + TSX(可选)
 
-在 Vue3 场景下我们默认在底层已加载 [@vue/babel-plugin-jsx](https://github.com/vuejs/jsx-next#installation) 插件，开发者可根据个人喜好决定使用 template 的方式抑或是 jsx 的方式进行开发。例如想使用 JSX 的话，只需要将 .vue 文件改为 .tsx 文件即可，如下 vue 组件
+在 Vue3 场景下我们默认在底层已加载 [@vue/babel-plugin-jsx](https://github.com/vuejs/jsx-next#installation) 插件，开发者可根据个人喜好决定使用 template 的方式抑或是 tsx 的方式进行开发。例如想使用 tsx 的话，只需要将 .vue 文件改为 .tsx 文件即可。如果你打算大量使用 TypeScript 来开发应用，我们更加推荐使用 tsx 文件的形式而不是传统 Vue 文件。如下 vue 组件
 
 ```vue
 <template>
@@ -440,7 +448,7 @@ export default {
 
 ```
 
-对应的 jsx 写法为 
+对应的 tsx 写法为 
 
 ```jsx
 // render.tsx
@@ -472,6 +480,26 @@ export default {
 }
 
 ```
+
+### 使用Vite作为构建工具
+
+在 [ssr-plugin-vue3](https://github.com/ykfe/ssr/tree/dev/packages/plugin-vue3) 中我们将 Vite 作为一个可选配置，底层已做兼容，但默认不会安装 Vite 相关依赖。具体使用方式如下
+
+```bash
+$ npm init ssr-app my-ssr-project --template=midway-vue3-ssr # 创建 Vue3 SSR 应用，同时支持 Serverless 形式一键发布或以传统 Node.js 应用的形式部署
+$ cd my-ssr-project && npm i && npm i vite @vitejs/plugin-vue --save-dev # 根据实际技术栈安装需要的插件
+$ npx ssr start --vite # 建议在 package.json 中添加 "start:vite": "ssr start --vite"
+```
+即可使用 Vite 作为构建工具接管客户端文件，提升启动速度和 HMR 速度。目前当前版本只在 Vue3 场景开启该功能，Vue2/React 的支持将会在下一个版本实现
+
+#### 老应用迁移
+
+之前创建的模板应用只需以下三步便可接入 Vite
+
+- 安装最新版本的依赖 version >= 5.5.1
+- layout/index.vue 中添加 `<slot name="viteClient" />` 参考该[文件](https://github.com/ykfe/ssr/blob/dev/example/midway-vue3-ssr/web/components/layout/index.vue)
+- 服务端应用启动时中间件初始化改为 `async await` 形式, 参考该[文件](https://github.com/ykfe/ssr/blob/dev/example/midway-vue3-ssr/src/app.ts#L11)
+
 ### 应用类型
 
 由于本框架同时具备 SSR 服务端渲染能力 以及 loadable 代码分割能力。我们天生可以看作既是单页面应用也是多页面应用。表现如下
@@ -514,19 +542,26 @@ export default {
 │   │   └── layout # 页面 html 布局
 │   │       ├── index.less
 │   │       └── index.tsx
-│   ├── pages # pages目录下的文件夹会映射为前端路由，存放页面级别的组件
-│   │   ├── index # index文件夹映射为根路由
-│   │   │   ├── fetch.ts # 定义fetch文件用来统一服务端/客户端获取数据的方式，通过 __isBrowser__ 变量区分环境
-│   │   │   ├── index.less
-│   │   │   └── render.tsx # 定义render文件用来定义页面渲染逻辑
-│   │   └── detail
-│   │       ├── fetch.ts
-│   │       ├── index.less
-│   │       └── render$id.tsx # 映射为 /detail/:id
-│   │       └── render$id$.tsx # 映射为 /detail/:id?
-│   │       └── user
-│   │           ├── fetch.ts
-│   │           └── render$id.tsx # 多级路由按照规则映射为 /detail/user/:id
+│   ├── pages # pages目录下的文件夹会映射为前端路由表，存放页面级别的组件
+│   │   ├── index # index文件夹映射为根路由
+│   │   │   ├── fetch.ts # 定义fetch文件用来统一服务端/客户端获取数据的方式，通过 __isBrowser__ 变量区分环境
+│   │   │   ├── index.less
+│   │   │   └── render.tsx # 定义render文件用来定义页面渲染逻辑
+│   │   └── detail
+│   │   │   ├── fetch.ts
+│   │   │   ├── index.less
+│   │   │   └── render$id.tsx # 映射为 /detail/:id
+│   │   │   └── user
+│   │   │        ├── fetch.ts
+│   │   │        └── render$id.tsx # 多级路由按照规则映射为 /detail/user/:id
+│   │   ├── foo 
+│   │   │   ├── fetch.ts
+│   │   │   └── render$user$id.tsx # 多参数路由映射为 /foo/:user/:id
+│   │   ├── bar 
+│   │   │   ├── fetch.ts
+│   │   │   └── render.tsx
+│   │   │   ├── fetch$id.ts
+│   │   │   └── render$id.tsx # 当存在多个 render 类型的文件时，每个 render 文件对应与其同名的 fetch 文件，例如 render$id 对应 fetch$id
 │   ├── tsconfig.json # 仅用于编辑器ts语法检测
 │   └── typings.d.ts
 ```
@@ -609,6 +644,135 @@ export default {
 
 }
 </script>
+
+```
+
+#### Vue3 全局注册指令
+
+由于 Vue3 创建 app 实例以及安装插件和注册自定义全局指令的方式与 Vue2 差别较大。为了方便用户开发，我们会将框架底层创建的 VueApp 实例挂在 `window.__VUE_APP__` 上方，在服务端/客户端都能够访问改属性。但由于服务端和客户端环境有差异。我们不建议过度依赖该属性。例如自定义指令会在服务端被忽略。在注册的时候我们需要根据当前环境做判断。
+
+```js
+// 在 layout/App.vue 中做一些全局的任务
+export default {
+  created () {
+    if (__isBrowser__) {
+      const app = window.__VUE_APP__
+      app.directive('focus', {
+        // 当被绑定的元素挂载到 DOM 中时……
+        mounted (el) {
+          // 聚焦元素
+          el.focus()
+        }
+      })
+    }
+  }
+}
+```
+#### 使用Vue3国际化插件
+
+在 plugin-vue3 中，我们已在底层对国际化进行支持。国际化插件使用最新的 Composition API，推荐使用Composition API进行国际化配置，详细见官方文档：https://vue-i18n.intlify.dev/guide/advanced/composition.html
+
+安装最新版本的 vue-i18n
+
+```bash
+$ npm i vue-i18n@^9.0.0 --save
+$ npm i @intlify/vue-i18n-loader@^2.0.3 --save-dev
+```
+
+配置中启用
+
+```js
+// config.js
+// 启用后构建时会使用相应 loader 进行构建
+module.exports = {
+  locale: {
+    enable: true
+  }
+}
+```
+
+在 `layout/App.vue` 做配置初始化
+
+```js
+import { createI18n } from 'vue-i18n'
+
+const i18n = createI18n({
+  // 默认配置
+  locale: 'en',
+  messages: {},
+  globalInjection: true,
+  // 模式锁定，传统模式SSR有bug
+  legacy: false
+})
+
+export default {
+  created () {
+    const app = window.__VUE_APP__
+    app.use(i18n)
+  }
+}
+```
+
+组件中使用
+
+```vue
+
+<template>
+  <div>
+    <select v-model="$i18n.locale">
+      <option value="en">
+        en
+      </option>
+      <option value="ja">
+        ja
+      </option>
+    </select>
+    <p>{{ t('named', { msg }) }}</p>
+    <p>{{ t('list', [msg]) }}</p>
+    <p>{{ t('literal') }}</p>
+    <p>{{ t('linked') }}</p>
+  </div>
+</template>
+
+<script>
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+export default {
+  setup () {
+    const { t } = useI18n({
+      messages: {
+        useScope: 'local',
+        en: {
+          msg: 'hello',
+          named: '{msg} world!',
+          list: '{0} world!',
+          literal: "{'hello'} world!",
+          the_world: 'the world',
+          dio: 'DIO:',
+          linked: '@:dio @:the_world !!!!'
+        },
+        ja: {
+          msg: 'こんにちは',
+          named: '{msg} 世界！',
+          list: '{0} 世界！',
+          literal: "{'こんにちは'} 世界！",
+          the_world: 'ザ・ワールド！',
+          dio: 'ディオ:',
+          linked: '@:dio @:the_world ！！！！'
+        }
+      }
+    })
+
+    const msg = computed(() => t('msg'))
+
+    return { t, msg }
+  }
+}
+</script>
+
+<style>
+
+</style>
 
 ```
 
@@ -917,16 +1081,16 @@ module.exports = [{
 
 #### 配置文件
 
-`config.js` 支持以下配置, 默认配置已适用于绝大部分应用, 无特殊需求不要修改。若需要区分本地环境与生产环境，可另外在根目录创建 `config.prod.js` 文件作为生产环境的构建配置
+`config.js` 支持以下配置, 默认配置已适用于绝大部分应用, 无特殊需求不要修改。若需要区分本地环境与生产环境，可另外在根目录创建 `config.prod.js` 文件作为生产环境的构建配置或在 `config.js` 使用 `process.env.NODE_ENV` 来区分配置
 
 ```js
 {
   mode: string; // 渲染模式，默认为 ssr
   stream: boolean; // 是否将组件编译成 Node.js.Stream 默认为 false 则编译为字符串
   isDev: boolean; // 当前运行环境，默认为 process.env.NODE_ENV
-  publicPath: string; // webpack-dev-server 的publishPath，默认为 /, 可替换为其他 CDN 地址 如 https://g.alicdn.com/path/xxx
+  publicPath: string; // 静态资源的publishPath，本地开发默认为 /, 生产环境可替换为其他 CDN 地址 如 https://g.alicdn.com/path/xxx
   useHash: boolean; // 生成文件是否带有 hash，默认本地运行关闭，生产环境构建时开启
-  fePort: number; // 前端静态资源本地开发时的监听端口，默认为 8000, FaaS Server 会自动 proxy,无特殊需求不需要修改
+  fePort: number; // 前端静态资源本地开发时的监听端口，默认为 8000, 本地开啊服务端 Server 会自动 proxy 静态资源,无特殊需求不需要修改
   chunkName: string; // 生成的 bundle 的 chunkName，默认为Page,无特殊需求不要修改
   webpackDevServerConfig: webpackDevServer.Configuration; // webpack-dev-server 启动配置
   chainBaseConfig: (config: Config) => Configuration // 使用 webpack-chain 来修改服务端/客户端公共的 wbepack 构建配置
@@ -948,12 +1112,17 @@ module.exports = [{
     // 我们不单独提供底部的 script，因为所需要实现的功能都能够在 App.vue 中实现
   }>
   css?: () => {
-    // 额外的 postcss 插件配置，需要用函数 return 的形式
+    // 用于添加用户自定义配置 css-loader 以及 postcss-loader，需要用函数 return 的形式
     loaderOptions: {
+      cssOptions: any
       postcss: {
+        options: any
         plugins: any[]
       }
     }
+  },
+  locale:{
+    enable: false // 是否启用vue-i18n国际化插件
   }
 }
 
@@ -1085,3 +1254,7 @@ export default {
 虽然我们已经尽力检查了一遍应用，但仍有可能有疏漏的地方，如果你在使用过程中发现任何问题或者建议，欢迎提[issue](https://github.com/ykfe/ssr/issues)或者[PR](https://github.com/ykfe/ssr/pulls)
 欢迎直接扫码加入钉钉群
 <img src="./images/dingding.jpeg" width="300">
+
+## 项目 Star 数增长趋势
+
+[![Stargazers over time](https://starchart.cc/ykfe/ssr.svg)](https://starchart.cc/ykfe/ssr)

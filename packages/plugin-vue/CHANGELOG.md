@@ -3,6 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.5.2](https://github.com/ykfe/ssr/compare/v5.5.1...v5.5.2) (2021-04-05)
+
+**Note:** Version bump only for package ssr-plugin-vue
+
+
+
+
+
+## [5.5.1](https://github.com/ykfe/ssr/compare/v5.5.0...v5.5.1) (2021-04-05)
+
+**Note:** Version bump only for package ssr-plugin-vue
+
+
+
+
+
+# [5.5.0](https://github.com/ykfe/ssr/compare/v5.4.26...v5.5.0) (2021-04-05)
+
+
+### Features
+
+* vite ([#39](https://github.com/ykfe/ssr/issues/39)) ([#42](https://github.com/ykfe/ssr/issues/42)) ([32217f5](https://github.com/ykfe/ssr/commit/32217f5729e5fc080dd6344d1033503cf330e2f9))
+
+
+
+
+
+## [5.4.26](https://github.com/ykfe/ssr/compare/v5.4.25...v5.4.26) (2021-04-01)
+
+**Note:** Version bump only for package ssr-plugin-vue
+
+
+
+
+
+## [5.4.25](https://github.com/ykfe/ssr/compare/v5.4.24...v5.4.25) (2021-03-29)
+
+**Note:** Version bump only for package ssr-plugin-vue
+
+
+
+
+
+## [5.4.24](https://github.com/ykfe/ssr/compare/v5.4.22...v5.4.24) (2021-03-26)
+
+**Note:** Version bump only for package ssr-plugin-vue
+
+
+
+
+
+## [5.4.23](https://github.com/ykfe/ssr/compare/v5.4.22...v5.4.23) (2021-03-25)
+
+**Note:** Version bump only for package ssr-plugin-vue
+
+
+
+
+
+## [5.4.22](https://github.com/ykfe/ssr/compare/v5.4.21...v5.4.22) (2021-03-22)
+
+**Note:** Version bump only for package ssr-plugin-vue
+
+
+
+
+
 ## [5.4.20](https://github.com/ykfe/ssr/compare/v5.4.19...v5.4.20) (2021-03-20)
 
 **Note:** Version bump only for package ssr-plugin-vue
